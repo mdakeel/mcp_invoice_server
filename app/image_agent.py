@@ -51,7 +51,7 @@ def parse_invoice_image(image_path):
     )
 
     raw = response.choices[0].message.content
-    # print("\n🧠 GPT Raw Response:\n", raw)
+    # print("\n GPT Raw Response:\n", raw)
     cleaned = raw.strip().strip("`").replace("json", "").strip()
 
     try:

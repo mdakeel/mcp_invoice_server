@@ -1,4 +1,3 @@
-
 # 🧠 MCP Invoice Server
 
 A modular invoice parsing system powered by GPT-4o Vision — built for real-world invoices in both image and PDF formats. No Swagger, no uvicorn — just clean CLI testing and direct GPT integration.
@@ -24,7 +23,6 @@ mcp_invoice_server/
 ├── requirements.txt          # Dependencies
 ├── .env                 # Contains OPENAI_API_KEY
 
-
 ## 🧪 How to Use
 
 ### 1. Install dependencies
@@ -33,21 +31,18 @@ mcp_invoice_server/
 pip install -r requirements.txt
 ```
 
-
 ### 2. Add your OpenAI API key
 
 Create a `.env` file:
 
 OPENAI_API_KEY=your_key_here
 
-
 3. ### Run the server
 
    python app/main.py
 
-
 ## 🧠 Model Used
 
-* `gpt-4o` — OpenAI’s latest multimodal model
+* `gpt-4o` : OpenAI’s latest multimodal model
 * Accepts both image and text input
 * Returns structured invoice data (client name, invoice number, total, etc.)
