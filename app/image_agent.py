@@ -1,6 +1,7 @@
 import base64
 import openai
 import os
+import json
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -14,12 +15,21 @@ def parse_invoice_image(image_path):
     base64_image = encode_image(image_path)
 
     prompt = """
-    You are an invoice parser. Extract the following from this image:
-    - Client name
-    - Invoice number
-    - All individual amounts
-    - Total amount
+    You are an invoice parsing assistant. Extract the following fields from the invoice image:
+    
+    - Client Name
+    - Invoice Number
+    - Total Amount
+    
+    Respond ONLY in JSON format like:
+    {
+      "client_name": "Rahul Sharma",
+      "invoice_number": "INV-2023-001",
+      "total_amount": "₹1250.00"
+    }
+    Do not include any explanation or extra text.
     """
+
 
     response = openai.chat.completions.create(
         model="gpt-4o",
@@ -40,4 +50,13 @@ def parse_invoice_image(image_path):
         max_tokens=800
     )
 
-    return response.choices[0].message.content
+    raw = response.choices[0].message.content
+    # print("\n🧠 GPT Raw Response:\n", raw)
+    cleaned = raw.strip().strip("`").replace("json", "").strip()
+
+    try:
+        parsed = json.loads(cleaned) 
+    except json.JSONDecodeError:
+        parsed = {"client_name": "", "invoice_number": "", "total_amount": "", "raw": raw}
+        
+    return parsed
