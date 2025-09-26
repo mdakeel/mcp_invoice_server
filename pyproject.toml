@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "mcp-invoice-server"
+version = "0.1.0"
+description = "Modular GPT-powered invoice extraction and validation server"
+authors = ["Aakil Tayyab"]
+readme = "README.md"
+packages = [{include = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+openai = "^1.3.5"
+PyPDF2 = "^3.0.1"
+fastapi = "^0.110.0"
+uvicorn = "^0.29.0"
+python-dotenv = "^1.0.1"
+
+[tool.poetry.dev-dependencies]
+black = "^24.3.0"
+isort = "^5.12.0"
+pytest = "^8.1.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
